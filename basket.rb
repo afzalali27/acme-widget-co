@@ -15,5 +15,10 @@ class Basket
     @items = []
   end
 
+  def add(code)
+    raise "Product code #{code} not found" unless PRODUCTS.key?(code)
+    @items << code
+  end
+
   
 end
