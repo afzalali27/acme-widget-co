@@ -20,5 +20,28 @@ class Basket
     @items << code
   end
 
-  
+  def total
+    subtotal = calculate_subtotal
+    delivery = calculate_delivery(subtotal)
+    const total = subtotal + delivery
+    sprintf('%.2f', total)
+  end
+
+  private
+
+  def calculate_subtotal
+    @items
+      .tally
+      .sum { |code, qty| line_total(code, qty) }
+  end
+
+  def line_total(code, qty)
+    price = PRODUCTS[code][:price]
+    qty * price
+  end
+
+  def calculate_delivery(subtotal)
+    rule = DELIVERY_RULES.find { |r| subtotal >= r[:threshold] }
+    rule[:cost]
+  end
 end
