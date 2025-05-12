@@ -1,8 +1,8 @@
 class Basket
   PRODUCTS = {
-    'R01': { name: 'Red Widget',   price: 32.95 },
-    'G01': { name: 'Green Widget', price: 24.95 },
-    'B01': { name: 'Blue Widget',  price:  7.95 }
+    'R01' => { name: 'Red Widget',   price: 32.95 },
+    'G01' => { name: 'Green Widget', price: 24.95 },
+    'B01' => { name: 'Blue Widget',  price:  7.95 }
   }
 
   DISCOUNTED_PRODUCTS_CODES = ['R01']
@@ -25,7 +25,7 @@ class Basket
   def total
     subtotal = calculate_subtotal
     delivery = calculate_delivery(subtotal)
-    const total = subtotal + delivery
+    total = subtotal + delivery
     sprintf('%.2f', total)
   end
 
