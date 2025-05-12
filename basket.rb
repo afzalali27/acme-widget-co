@@ -5,6 +5,8 @@ class Basket
     'B01': { name: 'Blue Widget',  price:  7.95 }
   }
 
+  DISCOUNTED_PRODUCTS_CODES = ['R01']
+
   DELIVERY_RULES = [
     { threshold: 90, cost: 0.00 },
     { threshold: 50, cost: 2.95 },
@@ -37,7 +39,12 @@ class Basket
 
   def line_total(code, qty)
     price = PRODUCTS[code][:price]
-    qty * price
+    if DISCOUNTED_PRODUCTS_CODES.include?(code)
+      buy_one_get_one_in_half_pairs, other_items = qty.divmod(2)
+      buy_one_get_one_in_half_pairs * price * 1.5 + other_items * price
+    else
+      qty * price
+    end
   end
 
   def calculate_delivery(subtotal)
